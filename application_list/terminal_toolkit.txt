@@ -1,0 +1,7 @@
+foot
+distrobox
+fish
+helix
+imv
+zellij
+paru

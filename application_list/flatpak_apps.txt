@@ -1,0 +1,9 @@
+firefox
+thunderbird
+obsidian
+boxes
+transmission
+copyq
+qalculate
+bitwarden
+flatseal
