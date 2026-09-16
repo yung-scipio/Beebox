@@ -1,2 +1,3 @@
 cosmic-session
+ly
 flatpak
