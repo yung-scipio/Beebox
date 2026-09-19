@@ -9,3 +9,4 @@ io.github.Qalculate
 com.visualstudio.code
 com.bitwarden.desktop
 com.github.tchx84.Flatseal
+org.fedoraproject.MediaWriter
