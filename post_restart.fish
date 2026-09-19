@@ -8,7 +8,8 @@ sleep 2s
 # Open Bitwarden for user to log into
 echo "You'll probably need this at some point... go ahead and log into Bitwarden and set it as your SSH Agent."
 sleep 3s
-flatpak run com.bitwarden.desktop
+flatpak run com.bitwarden.desktop &> /dev/null &
+disown
 
 # Set up and connect to Tailscale network
 echo "While you're doing that, I'm gonna set up Tailscale..."
