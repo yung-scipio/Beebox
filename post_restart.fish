@@ -18,9 +18,13 @@ sleep 3s
 sudo systemctl start tailscaled
 sudo systemctl enable --now tailscaled
 sudo tailscale up --qr
+sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+sudo systemctl restart systemd-resolved
+sudo systemctl restart NetworkManager
+sudo systemctl restart tailscaled
 
 tailscale status
-tailscale set --ssh # Enable Tailscale SSH for this machine
+sudo tailscale set --ssh # Enable Tailscale SSH for this machine
 
 # Set up Syncthing
 echo "Setting up Syncthing..."
@@ -34,5 +38,6 @@ set mothership_ip (tailscale ip -4 mothership)
 
 # tell Mothership about this machine
 ssh mothership "syncthing cli config devices add --device-id $my_id --name (hostname)"
-syncthing # log into Syncthing web GUI for local device
+syncthing &> /dev/null & # log into Syncthing web GUI for local device, 
+disown # disown
 flatpak run org.mozilla.firefox "https://$mothership_ip:8384" # open Syncthing web GUI for Mothership
