@@ -1,3 +1,5 @@
+#!/usr/bin/env fish
+
 echo "Hey, welcome back! Looks like we're resuming the setup process. Thanks for your patience. *bzz*bzz*"
 sleep 2s
 
@@ -12,10 +14,12 @@ flatpak run com.bitwarden.desktop
 echo "While you're doing that, I'm gonna set up Tailscale..."
 sleep 3s
 
-sudo tailscale up --qr
+sudo systemctl start tailscaled
 sudo systemctl enable --now tailscaled
+sudo tailscale up --qr
+
 tailscale status
-tailscale set ssh # Enable Tailscale SSH for this machine
+tailscale set --ssh # Enable Tailscale SSH for this machine
 
 # Set up Syncthing
 echo "Setting up Syncthing..."

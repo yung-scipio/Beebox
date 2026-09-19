@@ -4,6 +4,7 @@ fish
 chezmoi
 helix
 imv
+mpv
 yazi
 emacs
 zellij
