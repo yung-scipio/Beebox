@@ -18,4 +18,4 @@ sleep 3s
 
 sudo pacman -S --needed --noconfirm fish git curl # Install Fish if not already present
 chsh -s "$(command -v fish)" # Change shell to Fish
-exec fish ./setup.fish
+exec fish ./app_install.fish
