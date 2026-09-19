@@ -4,6 +4,26 @@ echo "Hey, welcome back! Looks like we're resuming the setup process. Thanks for
 sleep 2s
 
 ### SETTING UP ###
+# Swapping Caps Lock and Escape keys with keyd
+
+sudo mkdir -p /etc/keyd
+echo '
+[ids]
+
+*
+
+[main]
+
+# Maps capslock to escape when pressed
+capslock = esc
+
+# Remaps the escape key to capslock
+esc = capslock
+' | sudo tee /etc/keyd/default.conf > /dev/null
+
+sudo systemctl enable keyd --now
+echo "You should be able to use Caps Lock as Escape now."
+sleep 3s
 
 # Open Bitwarden for user to log into
 echo "You'll probably need this at some point... go ahead and log into Bitwarden and set it as your SSH Agent."
