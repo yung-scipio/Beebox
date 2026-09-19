@@ -9,4 +9,5 @@ yazi
 emacs
 zellij
 paru
+ouch
 jq
