@@ -24,4 +24,37 @@ echo "Here comes those fancy Flatpaks! Everybody, watch out!"
 sleep 3s
 flatpak install -y (cat ./application_list/flatpak_apps.txt)
 
-echo "alright if you're reading this have a nice day!"
+echo "Now to actually set all htis stuff up! *bzz*bzz*"
+
+### SETTING UP ###
+echo "You'll probably need this at some point..."
+sleep 3s
+flatpak run com.bitwarden.desktop
+
+# Set up and connect to Tailscale network
+
+echo "Setting up Tailscale..."
+sleep 3s
+sudo tailscale up --qr
+sudo systemctl enable --now tailscaled
+tailscale status
+tailscale set ssh # Enable Tailscale SSH for this machine
+
+# Set variable my_id to this machine's ID (device IDs aren't secret)
+set my_id (syncthing cli show system | jq -r .myID)
+
+# Set up Syncthing
+echo "Setting up Syncthing..."
+sleep 3s
+systemctl --user enable syncthing.service
+systemctl --user start syncthing.service
+
+# Set variable MOTHERSHIP_ID to Syncthing device ID of Mothership
+set MOTHERSHIP_ID (ssh mothership "syncthing cli show system" | jq -r .myID)
+
+# tell Mothership about this machine
+ssh mothership "syncthing cli config devices add --device-id $my_id --name (hostname)"
+syncthing # log into Syncthing web GUI
+
+
+
