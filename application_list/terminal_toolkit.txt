@@ -1,7 +1,11 @@
 foot
 distrobox
 fish
+chezmoi
 helix
 imv
+yazi
+emacs
 zellij
 paru
+jq

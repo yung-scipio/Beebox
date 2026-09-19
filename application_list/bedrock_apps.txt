@@ -1,6 +1,3 @@
 tailscale
 keyd
 wl-clipboard
-bitwarden
-bitwarden-cli
-rbw

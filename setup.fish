@@ -24,10 +24,13 @@ echo "Here comes those fancy Flatpaks! Everybody, watch out!"
 sleep 3s
 flatpak install -y (cat ./application_list/flatpak_apps.txt)
 
-echo "Now to actually set all htis stuff up! *bzz*bzz*"
+echo "Now to actually set all this stuff up! *bzz*bzz*"
+sleep 3s
 
 ### SETTING UP ###
-echo "You'll probably need this at some point..."
+
+# Open Bitwarden for user to log into
+echo "You'll probably need this at some point... (Bitwarden)"
 sleep 3s
 flatpak run com.bitwarden.desktop
 
@@ -35,26 +38,24 @@ flatpak run com.bitwarden.desktop
 
 echo "Setting up Tailscale..."
 sleep 3s
+
 sudo tailscale up --qr
 sudo systemctl enable --now tailscaled
 tailscale status
 tailscale set ssh # Enable Tailscale SSH for this machine
 
+# Set up Syncthing
+
+echo "Setting up Syncthing..."
+sleep 3s
+
 # Set variable my_id to this machine's ID (device IDs aren't secret)
 set my_id (syncthing cli show system | jq -r .myID)
 
-# Set up Syncthing
-echo "Setting up Syncthing..."
-sleep 3s
-systemctl --user enable syncthing.service
-systemctl --user start syncthing.service
-
-# Set variable MOTHERSHIP_ID to Syncthing device ID of Mothership
-set MOTHERSHIP_ID (ssh mothership "syncthing cli show system" | jq -r .myID)
+# Find Mothership's Tailscale IP address and set as variable mothership_ip
+set mothership_ip (tailscale ip -4 mothership)
 
 # tell Mothership about this machine
 ssh mothership "syncthing cli config devices add --device-id $my_id --name (hostname)"
-syncthing # log into Syncthing web GUI
-
-
-
+syncthing # log into Syncthing web GUI for local device
+flatpak run org.mozilla.firefox "https://$mothership_ip:8384" # open Syncthing web GUI for Mothership
