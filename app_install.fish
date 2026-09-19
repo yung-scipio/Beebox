@@ -27,6 +27,12 @@ flatpak install -y (cat ./application_list/flatpak_apps.txt)
 echo "Now to actually set all this stuff up! *bzz*bzz*"
 sleep 3s
 
+
+### CONFIG FILES ###
+echo "Real quick, we're gonna pull my dots from my GitHub repo and apply them to the system. Hold still..."
+sleep 3s
+chezmoi init --apply https://github.com/yung-scipio/mydots.git
+
 ### RESTART SYSTEM ###
 echo "Before we can continue, we need to restart the system. Don't forget to run post_restart.fish once you're logged into the COSMIC desktop environment. *bzz*bzz*"
 shutdown -r now

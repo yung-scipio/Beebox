@@ -1,4 +1,5 @@
 tailscale
 syncthing
+chezmoi
 keyd
 wl-clipboard
