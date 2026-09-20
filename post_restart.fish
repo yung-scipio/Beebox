@@ -30,6 +30,7 @@ echo "You'll probably need this at some point... go ahead and log into Bitwarden
 sleep 3s
 flatpak run com.bitwarden.desktop &> /dev/null &
 disown
+export SSH_AUTH_SOCK=/home/$USER/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock # Sets Bitwarden as SSH Agent
 
 # Set up and connect to Tailscale network
 echo "While you're doing that, I'm gonna set up Tailscale..."
